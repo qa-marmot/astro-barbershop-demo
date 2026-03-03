@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply font-body text-ink bg-cream antialiased;
+  }
+
+  h1, h2, h3, h4 { @apply font-display; }
+}
+
+@layer components {
+  .container-site {
+    @apply max-w-5xl mx-auto px-5 sm:px-8 lg:px-10;
+  }
+
+  .sec {
+    @apply py-20 md:py-28;
+  }
+
+  /* ── ボタン ── */
+  .btn-dark {
+    @apply inline-block px-9 py-3 bg-ink text-cream text-xs tracking-widest2 font-body font-medium
+           transition-colors duration-200 hover:bg-ink-light
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2;
+  }
+
+  .btn-outline-dark {
+    @apply inline-block px-9 py-3 border border-ink text-ink text-xs tracking-widest2 font-body font-medium
+           transition-colors duration-200 hover:bg-ink hover:text-cream
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2;
+  }
+
+  .btn-outline-light {
+    @apply inline-block px-9 py-3 border border-cream/60 text-cream text-xs tracking-widest2 font-body font-medium
+           transition-colors duration-200 hover:bg-cream hover:text-ink
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2;
+  }
+
+  /* ── セクション見出し ── */
+  .section-label {
+    @apply block text-[10px] tracking-widest2 text-gold uppercase mb-3 font-body;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-display font-semibold text-ink leading-tight;
+  }
+
+  /* ── 区切り線 ── */
+  .divider {
+    @apply w-10 h-px bg-gold my-5 mx-auto;
+  }
+
+  /* ── リッチテキスト ── */
+  .rich-text h2 { @apply text-2xl font-display font-semibold text-ink mt-10 mb-3 pb-2 border-b border-cream-dark; }
+  .rich-text h3 { @apply text-lg font-display font-medium text-ink mt-6 mb-2; }
+  .rich-text p  { @apply text-ink-muted leading-relaxed mb-4 text-sm; }
+  .rich-text ul { @apply list-disc list-inside mb-4 space-y-1 text-sm text-ink-muted; }
+  .rich-text ol { @apply list-decimal list-inside mb-4 space-y-1 text-sm text-ink-muted; }
+  .rich-text a  { @apply text-ink underline underline-offset-2 hover:text-gold; }
+  .rich-text img{ @apply max-w-full h-auto my-6; }
+}

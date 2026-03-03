@@ -1,0 +1,52 @@
+---
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import StructuredData from "@/components/StructuredData.astro";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "東京都渋谷区のバーバーショップ「Trim Studio（トリムスタジオ）」。精確な技術と落ち着いた空間でお客様に寄り添います。",
+  ogImage,
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://example.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content="ja_JP" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <StructuredData />
+</head>
+<body>
+  <Header />
+  <main class="pt-[70px]">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

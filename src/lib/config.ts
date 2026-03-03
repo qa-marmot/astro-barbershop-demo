@@ -1,0 +1,21 @@
+export const SITE = {
+  name: "Trim Studio",
+  nameJa: "トリムスタジオ",
+  tagline: "Precision Barbering · Est. 2018",
+  tel: "03-0000-0000",
+  telHref: "tel:0300000000",
+  postalCode: "150-0001",
+  address: "東京都渋谷区神宮前1丁目1-1",
+  addressStreet: "神宮前1丁目1-1",
+  addressLocality: "渋谷区",
+  addressRegion: "東京都",
+  lat: 35.665498,
+  lng: 139.706473,
+  hours: {
+    weekday: "火 〜 金　10:00 – 20:00",
+    weekend: "土 ・ 日　10:00 – 19:00",
+  },
+  closed: "月曜日 / 第1火曜日",
+  instagram: "https://www.instagram.com/",
+  siteUrl: import.meta.env.PUBLIC_SITE_URL ?? "https://example.com",
+};

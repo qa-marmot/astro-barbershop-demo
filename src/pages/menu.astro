@@ -1,0 +1,130 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Icon from "@/components/Icon.astro";
+import { SITE } from "@/lib/config";
+
+const sections = [
+  {
+    id: "cut",
+    label: "Cut",
+    title: "カット",
+    items: [
+      { name: "カット",              price: "¥4,000", desc: "カウンセリングで骨格・髪質を把握し、お客様に最適なスタイルをご提案します。" },
+      { name: "カット + シャンプー", price: "¥4,800", desc: "カットに加えてヘッドスパシャンプーでリフレッシュ。" },
+    ],
+  },
+  {
+    id: "shave",
+    label: "Shave",
+    title: "シェービング",
+    items: [
+      { name: "シェービング",            price: "¥2,500", desc: "伝統的な直刃技法でクリーンな仕上がりをお届けします。" },
+      { name: "フェイシャルシェービング", price: "¥3,000", desc: "顔全体の産毛を丁寧に処理。肌トーンアップ効果も。" },
+    ],
+  },
+  {
+    id: "set",
+    label: "Set",
+    title: "セットメニュー",
+    items: [
+      { name: "カット + シェービング",                  price: "¥6,000", desc: "カットとシェービングのセット。洗練されたトータルスタイルに。" },
+      { name: "カット + シャンプー + シェービング",     price: "¥6,800", desc: "人気のフルコース。至福のひとときをどうぞ。" },
+    ],
+  },
+  {
+    id: "other",
+    label: "Other",
+    title: "その他",
+    items: [
+      { name: "シャンプー",   price: "¥1,200", desc: "頭皮マッサージ付きのリフレッシュシャンプー。" },
+      { name: "カラー",       price: "¥5,000〜", desc: "ご要望に合わせたカラーリング。※カット料金別途。" },
+      { name: "パーマ",       price: "¥6,000〜", desc: "スタイリングしやすいパーマスタイル。※カット料金別途。" },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Menu | Trim Studio"
+  description="Trim Studio のメニュー・料金一覧。カット・シェービングなど各種メニューをご用意しております。"
+>
+  <!-- ページヘッダー -->
+  <section class="py-20 md:py-24 bg-ink">
+    <div class="container-site">
+      <span class="section-label text-gold">Services & Pricing</span>
+      <h1 class="font-display text-5xl md:text-6xl text-cream font-semibold leading-tight">Menu</h1>
+    </div>
+  </section>
+
+  <!-- 料金表 -->
+  <section class="sec bg-cream">
+    <div class="container-site">
+      <div class="space-y-16">
+        {sections.map(section => (
+          <div id={section.id}>
+            <!-- セクション見出し -->
+            <div class="flex items-center gap-5 mb-6">
+              <span class="text-[9px] tracking-widest2 uppercase text-gold font-body">{section.label}</span>
+              <span class="flex-1 h-px bg-ink/10"></span>
+              <h2 class="font-display text-2xl text-ink">{section.title}</h2>
+            </div>
+
+            <div class="space-y-3">
+              {section.items.map(item => (
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-5 px-6 bg-cream-dark border-l-2 border-gold/40 hover:border-gold transition-colors duration-200">
+                  <div class="flex-1">
+                    <p class="font-display text-lg text-ink mb-1">{item.name}</p>
+                    <p class="text-xs text-ink-muted font-body leading-relaxed">{item.desc}</p>
+                  </div>
+                  <p class="font-display text-2xl text-gold font-semibold sm:text-right flex-shrink-0">{item.price}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ご利用にあたって -->
+  <section class="sec bg-cream-dark">
+    <div class="container-site">
+      <div class="max-w-2xl mx-auto">
+        <span class="section-label">Notice</span>
+        <h2 class="section-title mb-6">ご利用にあたって</h2>
+        <ul class="space-y-3">
+          {[
+            "料金はすべて税込価格です。",
+            "初めてのお客様はカウンセリングにお時間をいただく場合があります。",
+            "髪質・状態により料金が変動する場合がございます。",
+            "ご予約優先ですが、空きがあればご予約なしでもご案内できます。",
+            "ご不明な点はお気軽にお問い合わせください。",
+          ].map(text => (
+            <li class="flex items-start gap-3 text-sm text-ink-muted font-body">
+              <span class="text-gold mt-0.5 flex-shrink-0">
+                <Icon name="chevron-right" class="w-3.5 h-3.5" />
+              </span>
+              {text}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec bg-ink">
+    <div class="container-site text-center">
+      <span class="section-label text-gold/70">Reservation</span>
+      <h2 class="font-display text-3xl text-cream mb-3">ご予約・お問い合わせ</h2>
+      <div class="divider"></div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <a href={SITE.telHref} class="inline-flex items-center justify-center gap-2 btn-outline-light">
+          <Icon name="phone" class="w-4 h-4" />
+          {SITE.tel}
+        </a>
+        <a href="/contact" class="btn-outline-light">Contact Form</a>
+      </div>
+    </div>
+  </section>
+</Layout>

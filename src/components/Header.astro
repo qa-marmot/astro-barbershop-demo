@@ -1,0 +1,100 @@
+---
+const nav = [
+  { href: "/",        label: "Top" },
+  { href: "/menu",    label: "Menu" },
+  { href: "/blog",    label: "Blog" },
+  { href: "/access",  label: "Access" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-300"
+>
+  <!-- 背景：スクロール前は透明、後は cream with border -->
+  <div class="container-site">
+    <div class="flex items-center justify-between h-[70px]">
+
+      <!-- ロゴ -->
+      <a href="/" class="font-display text-xl font-semibold tracking-widest text-ink">
+        TRIM STUDIO
+      </a>
+
+      <!-- デスクトップ nav -->
+      <nav class="hidden md:flex items-center gap-10" aria-label="メインナビゲーション">
+        {nav.map(l => (
+          <a
+            href={l.href}
+            class="text-[11px] font-body font-medium tracking-widest2 text-ink-muted uppercase hover:text-ink transition-colors duration-200"
+          >
+            {l.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- モバイル ハンバーガー -->
+      <button
+        id="menu-btn"
+        class="md:hidden flex items-center justify-center w-9 h-9 text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="メニューを開く"
+      >
+        <span id="icon-menu"><slot name="menu-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+          </svg>
+        </slot></span>
+        <span id="icon-close" class="hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- モバイル メニュー -->
+  <div
+    id="mobile-nav"
+    class="md:hidden hidden bg-cream border-t border-cream-dark"
+    role="navigation"
+    aria-label="モバイルナビゲーション"
+  >
+    {nav.map(l => (
+      <a
+        href={l.href}
+        class="block px-7 py-4 text-[11px] font-body tracking-widest2 uppercase text-ink-muted hover:text-ink hover:bg-cream-dark transition-colors duration-150"
+      >
+        {l.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script>
+  const btn    = document.getElementById("menu-btn")!;
+  const nav    = document.getElementById("mobile-nav")!;
+  const iMenu  = document.getElementById("icon-menu")!;
+  const iClose = document.getElementById("icon-close")!;
+  const header = document.getElementById("site-header")!;
+
+  btn.addEventListener("click", () => {
+    const open = nav.classList.toggle("hidden") === false;
+    btn.setAttribute("aria-expanded", String(open));
+    iMenu.classList.toggle("hidden", open);
+    iClose.classList.toggle("hidden", !open);
+  });
+
+  // スクロール時に背景を追加
+  const update = () => {
+    if (window.scrollY > 10) {
+      header.classList.add("bg-cream/95", "backdrop-blur-sm", "border-b", "border-cream-dark/60", "shadow-sm");
+    } else {
+      header.classList.remove("bg-cream/95", "backdrop-blur-sm", "border-b", "border-cream-dark/60", "shadow-sm");
+    }
+  };
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+</script>

@@ -1,0 +1,31 @@
+---
+import { SITE } from "@/lib/config";
+
+const sd = {
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  name: SITE.name,
+  image: `${SITE.siteUrl}/images/logo.png`,
+  "@id": SITE.siteUrl,
+  url: SITE.siteUrl,
+  telephone: SITE.tel,
+  priceRange: "¥¥",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.addressStreet,
+    addressLocality: SITE.addressLocality,
+    addressRegion: SITE.addressRegion,
+    postalCode: SITE.postalCode,
+    addressCountry: "JP",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: SITE.lat, longitude: SITE.lng },
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Tuesday","Wednesday","Thursday","Friday"], opens: "10:00", closes: "20:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Saturday","Sunday"], opens: "10:00", closes: "19:00" },
+  ],
+  sameAs: [SITE.instagram],
+};
+
+const safeJson = JSON.stringify(sd).replace(/<\/script>/gi, "<\\/script>");
+---
+<script type="application/ld+json" set:html={safeJson} />

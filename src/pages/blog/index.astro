@@ -1,0 +1,104 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Icon from "@/components/Icon.astro";
+import { getBlogList, getCategoryName } from "@/lib/microcms";
+
+export const prerender = true;
+
+const { contents: posts, totalCount } = await getBlogList(20);
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+}
+---
+
+<Layout
+  title="Blog | Trim Studio"
+  description="Trim Studio のブログ。スタイリングのヒントや店からのお知らせをお届けします。"
+>
+  <!-- ページヘッダー -->
+  <section class="py-20 md:py-24 bg-ink">
+    <div class="container-site">
+      <span class="section-label text-gold">Latest Posts</span>
+      <h1 class="font-display text-5xl md:text-6xl text-cream font-semibold leading-tight">Blog</h1>
+    </div>
+  </section>
+
+  <!-- 記事一覧 -->
+  <section class="sec bg-cream">
+    <div class="container-site">
+
+      {posts.length > 0 ? (
+        <>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post) => {
+              const cat = getCategoryName(post.category);
+              return (
+                <a
+                  href={`/blog/${post.id}`}
+                  class="group flex flex-col bg-white border border-ink/8 hover:border-gold/50 transition-colors duration-200 overflow-hidden"
+                >
+                  {/* アイキャッチ */}
+                  {post.eyecatch ? (
+                    <div class="aspect-video overflow-hidden bg-cream-dark">
+                      <img
+                        src={post.eyecatch.url + "?w=600&q=80"}
+                        alt={post.title}
+                        width="600"
+                        height="338"
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                      />
+                    </div>
+                  ) : (
+                    <div class="aspect-video bg-cream-dark flex items-center justify-center">
+                      <Icon name="scissors" class="w-8 h-8 text-ink/15" />
+                    </div>
+                  )}
+
+                  {/* テキスト */}
+                  <div class="flex flex-col flex-1 p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                      <time class="text-[10px] text-ink-muted font-body tracking-wider">
+                        {formatDate(post.publishedAt)}
+                      </time>
+                      {cat && (
+                        <span class="inline-block px-2.5 py-0.5 text-[9px] tracking-widest uppercase font-body bg-ink text-cream">
+                          {cat}
+                        </span>
+                      )}
+                    </div>
+                    <h2 class="font-display text-lg text-ink leading-snug mb-3 group-hover:text-gold transition-colors duration-200 flex-1">
+                      {post.title}
+                    </h2>
+                    <span class="inline-flex items-center gap-1 text-[10px] tracking-widest uppercase text-gold font-body mt-auto">
+                      Read More
+                      <Icon name="arrow-right" class="w-3 h-3" />
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          {totalCount > 20 && (
+            <p class="text-center text-xs text-ink-muted font-body mt-10">
+              全 {totalCount} 件中 20 件を表示しています。
+            </p>
+          )}
+        </>
+      ) : (
+        <div class="text-center py-24">
+          <Icon name="scissors" class="w-10 h-10 text-ink/15 mx-auto mb-4" />
+          <p class="text-sm text-ink-muted font-body">現在、記事はありません。</p>
+        </div>
+      )}
+
+    </div>
+  </section>
+</Layout>

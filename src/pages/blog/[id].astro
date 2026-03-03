@@ -1,0 +1,112 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Icon from "@/components/Icon.astro";
+import { getBlogDetail, getAllBlogIds, getCategoryName } from "@/lib/microcms";
+import { sanitizeHtml } from "@/lib/sanitize";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const ids = await getAllBlogIds();
+  return ids.map((id) => ({ params: { id } }));
+}
+
+const { id } = Astro.params;
+const post = await getBlogDetail(id);
+
+if (!post) return Astro.redirect("/404");
+
+const safeContent = sanitizeHtml(post.content);
+const cat         = getCategoryName(post.category);
+
+const publishedAt = new Date(post.publishedAt);
+const updatedAt   = new Date(post.updatedAt);
+const isUpdated   = Math.abs(publishedAt.getTime() - updatedAt.getTime()) > 60_000;
+
+const localeOpts: Intl.DateTimeFormatOptions = {
+  year: "numeric", month: "long", day: "numeric",
+};
+
+// OG description: HTML タグを除去して先頭 120 文字
+const ogDesc = post.content.replace(/<[^>]+>/g, "").slice(0, 120);
+---
+
+<Layout
+  title={`${post.title} | Blog | Trim Studio`}
+  description={ogDesc}
+  ogImage={post.eyecatch?.url}
+>
+  <!-- ページヘッダー -->
+  <section class="py-16 md:py-20 bg-ink">
+    <div class="container-site">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-5">
+          <time
+            class="text-[10px] tracking-wider text-cream font-body"
+            datetime={post.publishedAt}
+          >
+            {publishedAt.toLocaleDateString("ja-JP", localeOpts)}
+          </time>
+          {cat && (
+            <span class="inline-block px-2.5 py-0.5 text-[9px] tracking-widest uppercase font-body bg-gold text-gold border border-gold/30">
+              {cat}
+            </span>
+          )}
+        </div>
+        <h1 class="font-display text-3xl md:text-4xl text-cream font-semibold leading-snug">
+          {post.title}
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- アイキャッチ -->
+  {post.eyecatch && (
+    <div class="bg-ink">
+      <div class="container-site pb-0">
+        <div class="max-w-2xl">
+          <img
+            src={post.eyecatch.url + "?w=900&q=85"}
+            alt={post.title}
+            width="900"
+            height={Math.round(900 * (post.eyecatch.height / post.eyecatch.width))}
+            loading="eager"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- 本文 -->
+  <section class="sec bg-cream">
+    <div class="container-site">
+      <div class="max-w-2xl">
+
+        <!-- 本文（サニタイズ済み） -->
+        <div class="rich-text" set:html={safeContent} />
+
+        <!-- 日付フッター -->
+        <div class="mt-14 pt-5 border-t border-ink/10 text-[11px] text-ink-muted font-body space-y-1">
+          <p>公開日：{publishedAt.toLocaleDateString("ja-JP", localeOpts)}</p>
+          {isUpdated && (
+            <p>更新日：{updatedAt.toLocaleDateString("ja-JP", localeOpts)}</p>
+          )}
+        </div>
+
+        <!-- 戻るリンク -->
+        <div class="mt-10">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-1.5 text-xs text-ink-muted font-body tracking-widest uppercase hover:text-ink transition-colors duration-200"
+          >
+            <Icon name="arrow-left" class="w-3.5 h-3.5" />
+            Back to Blog
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
