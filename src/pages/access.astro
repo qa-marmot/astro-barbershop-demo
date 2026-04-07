@@ -7,9 +7,24 @@ const mapQuery = encodeURIComponent(SITE.address);
 const mapSrc   = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 
 const routes = [
-  { icon: "train" as const, label: "Train", title: "電車でお越しの場合",   body: "JR・東急各線「渋谷駅」ハチ公口より徒歩約5分。" },
-  { icon: "car"   as const, label: "Car",   title: "お車でお越しの場合",   body: "首都高速3号渋谷線「渋谷出口」より約5分。店舗近隣にコインパーキングあり。" },
-  { icon: "bus"   as const, label: "Bus",   title: "バスでお越しの場合",   body: "都営バス「神宮前」バス停下車、徒歩約2分。" },
+  {
+    icon: "train" as const,
+    label: "Train",
+    title: "電車でお越しの場合",
+    body: "JR・東急各線「渋谷駅」ハチ公口より徒歩約5分。",
+  },
+  {
+    icon: "car" as const,
+    label: "Car",
+    title: "お車でお越しの場合",
+    body: "首都高速3号渋谷線「渋谷出口」より約5分。店舗近隣にコインパーキングあり。",
+  },
+  {
+    icon: "bus" as const,
+    label: "Bus",
+    title: "バスでお越しの場合",
+    body: "都営バス「神宮前」バス停下車、徒歩約2分。",
+  },
 ];
 ---
 
@@ -17,29 +32,43 @@ const routes = [
   title="Access | Trim Studio"
   description="Trim Studio へのアクセス方法。渋谷駅より徒歩5分。"
 >
-  <!-- ページヘッダー -->
-  <section class="py-20 md:py-24 bg-ink">
-    <div class="container-site">
-      <span class="section-label text-gold/70">Location & Hours</span>
-      <h1 class="font-display text-5xl md:text-6xl text-cream font-semibold leading-tight">Access</h1>
+
+  <!-- ━━━━━━━━ ページヘッダー ━━━━━━━━ -->
+  <section class="relative py-24 md:py-32 bg-ink overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.18]">
+      <img
+        src="https://images.unsplash.com/photo-1621605816197-6da28e0e9fb6?auto=format&fit=crop&w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0" style="background: linear-gradient(to right, #1c1917 35%, rgba(28,25,23,0.55));"></div>
+    </div>
+
+    <span class="watermark-dark absolute right-[-3%] top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">ACCESS</span>
+
+    <div class="container-site relative z-10 animate-fade-up">
+      <span class="section-label text-gold/55">Location & Hours</span>
+      <h1 class="font-display text-6xl md:text-7xl text-cream font-semibold leading-none">Access</h1>
     </div>
   </section>
 
-  <!-- 店舗情報 + アクセス方法 -->
+
+  <!-- ━━━━━━━━ 店舗情報 + アクセス方法 ━━━━━━━━ -->
   <section class="sec bg-cream">
     <div class="container-site">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div class="grid grid-cols-12 gap-10 md:gap-16">
 
-        <!-- 店舗情報 -->
-        <div>
+        <!-- 店舗情報（左） -->
+        <div class="col-span-12 lg:col-span-6 reveal-left">
           <span class="section-label">Shop Info</span>
           <h2 class="section-title mb-8">店舗情報</h2>
 
-          <dl class="divide-y divide-ink/10">
+          <dl class="divide-y divide-ink/8">
             {[
               { dt: "店舗名",   dd: `${SITE.name}（${SITE.nameJa}）` },
               { dt: "住所",     dd: `〒${SITE.postalCode}<br/>${SITE.address}` },
-              { dt: "電話",     dd: `<a href="${SITE.telHref}" class="hover:text-gold transition-colors">${SITE.tel}</a>` },
+              { dt: "電話",     dd: `<a href="${SITE.telHref}" class="hover:text-gold transition-colors duration-200">${SITE.tel}</a>` },
               { dt: "営業時間", dd: `${SITE.hours.weekday}<br/>${SITE.hours.weekend}` },
               { dt: "定休日",   dd: SITE.closed },
               { dt: "駐車場",   dd: "近隣コインパーキングをご利用ください" },
@@ -51,23 +80,25 @@ const routes = [
             ))}
           </dl>
 
-          <div class="mt-8">
-            <a href={SITE.telHref} class="btn-outline-dark inline-flex items-center gap-2.5">
+          <div class="mt-8 flex gap-3 flex-wrap">
+            <a href={SITE.telHref} class="btn-outline-dark inline-flex items-center gap-2">
               <Icon name="phone" class="w-4 h-4" />
               電話でお問い合わせ
             </a>
+            <a href="/contact" class="btn-dark">Contact Form</a>
           </div>
         </div>
 
-        <!-- アクセス方法 -->
-        <div>
+        <!-- アクセス方法（右） -->
+        <div class="col-span-12 lg:col-span-6 reveal-right delay-200">
           <span class="section-label">How to Get Here</span>
           <h2 class="section-title mb-8">アクセス方法</h2>
+
           <div class="space-y-4">
-            {routes.map(r => (
-              <div class="bg-cream-dark p-5 border-l-2 border-gold/40 hover:border-gold transition-colors duration-200">
+            {routes.map((r, i) => (
+              <div class={`p-5 border-l-2 border-gold/35 hover:border-gold bg-cream-dark hover:bg-cream transition-all duration-300 delay-${i * 100}`}>
                 <div class="flex items-center gap-3 mb-2">
-                  <span class="text-gold"><Icon name={r.icon} class="w-4 h-4" /></span>
+                  <span class="text-gold flex-shrink-0"><Icon name={r.icon} class="w-4 h-4" /></span>
                   <span class="text-[9px] tracking-widest2 uppercase text-ink-muted font-body">{r.label}</span>
                   <span class="font-display text-base text-ink">{r.title}</span>
                 </div>
@@ -76,17 +107,52 @@ const routes = [
             ))}
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Google マップ -->
-  <section class="bg-cream-dark py-0">
+
+  <!-- ━━━━━━━━ 外観写真 ━━━━━━━━ -->
+  <section class="bg-cream-dark">
+    <div class="container-site py-14">
+      <div class="flex items-end justify-between mb-8 reveal">
+        <div>
+          <span class="section-label">Exterior</span>
+          <h2 class="section-title">店舗外観</h2>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-4 reveal">
+        <!-- 大きい画像 -->
+        <div class="col-span-12 md:col-span-7 overflow-hidden" style="aspect-ratio: 16/9;">
+          <img
+            src="https://images.unsplash.com/photo-1578177211754-0f05c4b5e9f7?auto=format&fit=crop&w=1200&q=80"
+            alt="店舗外観"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+          />
+        </div>
+        <!-- 縦長画像 -->
+        <div class="col-span-12 md:col-span-5 overflow-hidden" style="aspect-ratio: 4/3;">
+          <img
+            src="https://images.unsplash.com/photo-1541533848490-bc8115cd6522?auto=format&fit=crop&w=800&q=80"
+            alt="店内の雰囲気"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ━━━━━━━━ Google マップ ━━━━━━━━ -->
+  <section class="relative">
     <div class="border-y border-ink/10">
       <iframe
         src={mapSrc}
         width="100%"
-        height="420"
+        height="440"
         class="border-0 block"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -96,29 +162,19 @@ const routes = [
     </div>
   </section>
 
-  <!-- 外観写真 -->
-  <section class="sec bg-cream">
-    <div class="container-site">
-      <span class="section-label">Exterior</span>
-      <h2 class="section-title mb-8">店舗外観</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {["外観 1", "外観 2"].map(l => (
-          <div class="aspect-video bg-cream-dark border border-ink/5 flex items-center justify-center">
-            <span class="text-xs text-ink/25 font-body">{l}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="sec bg-ink">
-    <div class="container-site text-center">
-      <span class="section-label text-gold">Reservation</span>
-      <h2 class="font-display text-3xl text-cream mb-3">ご予約・お問い合わせ</h2>
+  <!-- ━━━━━━━━ CTA ━━━━━━━━ -->
+  <section class="py-20 bg-ink relative overflow-hidden">
+    <span class="watermark-dark absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none">BOOK</span>
+    <div class="container-site relative z-10 text-center reveal">
+      <span class="section-label text-gold/55">Reservation</span>
+      <h2 class="font-display text-3xl md:text-4xl text-cream mb-3">ご予約・お問い合わせ</h2>
       <div class="divider"></div>
       <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-        <a href={SITE.telHref} class="inline-flex items-center justify-center gap-2 btn-outline-light">
+        <a
+          href={SITE.telHref}
+          class="inline-flex items-center justify-center gap-2 btn-outline-light"
+        >
           <Icon name="phone" class="w-4 h-4" />
           {SITE.tel}
         </a>
@@ -126,4 +182,5 @@ const routes = [
       </div>
     </div>
   </section>
+
 </Layout>

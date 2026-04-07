@@ -20,60 +20,114 @@ function formatDate(iso: string) {
   description="東京都渋谷区のバーバーショップ「Trim Studio」。カット・シェービングを中心に、精確な技術で一人ひとりのスタイルを仕上げます。"
 >
 
-  <!-- ━━━━━━━━ HERO ━━━━━━━━ -->
-  <section class="relative min-h-[70vh] md:min-h-[80vh] flex flex-col justify-center md:justify-end bg-ink overflow-hidden">
-    <!-- 背景グラデーション装飾 -->
-    <div class="absolute inset-0 opacity-20 pointer-events-none"
-        style="background: radial-gradient(ellipse 70% 60% at 70% 40%, #c8a96e22 0%, transparent 70%);">
+  <!-- ━━━━━━━━ HERO（非対称レイアウト） ━━━━━━━━ -->
+  <section class="relative min-h-screen flex items-center bg-ink overflow-hidden">
+    <!-- 背景画像（低不透明度） -->
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover opacity-[0.18]"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="absolute inset-0" style="background: linear-gradient(to right, #1c1917 40%, rgba(28,25,23,0.7) 100%);"></div>
     </div>
-    <!-- 細かい縦線 装飾 -->
-    <div class="absolute top-0 left-[12%] w-px h-full bg-cream/5 pointer-events-none"></div>
-    <div class="absolute top-0 right-[18%] w-px h-full bg-cream/5 pointer-events-none"></div>
 
-    <div class="container-site pb-20 md:pb-28 animate-fade-up">
-      <!-- タグライン -->
-      <p class="section-label text-gold mb-6">{SITE.tagline}</p>
+    <!-- 装飾縦線 -->
+    <div class="absolute top-0 left-[36%] w-px h-full bg-cream/[0.04] hidden lg:block pointer-events-none"></div>
+    <div class="absolute top-0 right-[22%] w-px h-full bg-gold/[0.07] hidden lg:block pointer-events-none"></div>
 
-      <!-- メイン見出し -->
-      <h1 class="font-display text-[clamp(3.5rem,10vw,7rem)] font-semibold text-cream leading-[0.9] tracking-tight mb-8">
-        Trim<br/>Studio
-      </h1>
+    <!-- 透かし文字 -->
+    <span class="watermark-dark absolute right-[-3%] top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">BARBER</span>
 
-      <p class="text-cream/60 text-sm leading-relaxed max-w-xs mb-10 font-body">
-        ひとりひとりの個性に向き合い、<br/>
-        細部まで丁寧に仕上げるバーバーショップ。
-      </p>
+    <!-- 縦書きアクセント -->
+    <div class="absolute left-5 bottom-28 hidden xl:flex flex-col items-center gap-3">
+      <span class="vertical-text text-[9px] tracking-widest2 text-gold/35 uppercase font-body">Est. 2018</span>
+      <span class="w-px h-16 bg-gold/20"></span>
+    </div>
 
-      <div class="flex flex-wrap gap-4">
-        <a href="/menu"    class="btn-outline-light">View Menu</a>
-        <a href="/contact" class="btn-outline-light">Book Now</a>
+    <!-- コンテンツ -->
+    <div class="container-site relative z-10 py-28">
+      <div class="grid grid-cols-12 gap-4 lg:gap-8 items-center">
+
+        <!-- テキスト（左7カラム） -->
+        <div class="col-span-12 lg:col-span-7 animate-fade-up">
+          <p class="section-label text-gold/75 mb-7">{SITE.tagline}</p>
+
+          <h1 class="font-display text-[clamp(3.8rem,11vw,7.5rem)] font-semibold text-cream leading-[0.88] tracking-tight mb-5">
+            Trim<br/>
+            <em class="not-italic" style="color:#c8a96e;">Studio</em>
+          </h1>
+
+          <div class="flex items-center gap-4 mb-8">
+            <span class="w-10 h-px bg-gold/50"></span>
+            <p class="text-cream/35 text-[11px] tracking-widest2 uppercase font-body">
+              Tokyo · Shibuya · Since 2018
+            </p>
+          </div>
+
+          <p class="text-cream/55 text-sm leading-relaxed max-w-xs mb-10 font-body">
+            ひとりひとりの個性に向き合い、<br/>
+            細部まで丁寧に仕上げるバーバーショップ。
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="/menu" class="btn-outline-light">View Menu</a>
+            <a href="/contact" class="btn-gold">Book Now</a>
+          </div>
+        </div>
+
+        <!-- 画像パネル（右5カラム）モバイルでは非表示 -->
+        <div class="hidden lg:block col-span-5 relative">
+          <div class="relative ml-6">
+            <!-- メイン画像 -->
+            <div class="aspect-[3/4] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=800&q=80"
+                alt="バーバーの職人技"
+                class="w-full h-full object-cover"
+                loading="eager"
+              />
+              <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(28,25,23,0.35) 0%, transparent 60%);"></div>
+            </div>
+            <!-- オフセットフレーム（非対称装飾） -->
+            <div class="absolute -bottom-5 -right-5 w-full h-full border border-gold/22 pointer-events-none"></div>
+            <!-- フローティングバッジ -->
+            <div class="absolute -left-12 bottom-20 bg-ink/90 backdrop-blur-sm border border-gold/28 p-4 text-center min-w-[80px]">
+              <p class="font-display text-3xl text-gold leading-none">7<span class="text-xl">+</span></p>
+              <p class="text-[9px] text-cream/35 tracking-widest uppercase font-body mt-1">Years</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- スクロール インジケーター -->
-    <div class="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-cream/30">
-      <span class="text-[9px] tracking-widest2 uppercase rotate-90 origin-center translate-x-4">Scroll</span>
-      <span class="w-px h-10 bg-cream/20"></span>
+    <!-- スクロールキュー -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none">
+      <span class="text-[9px] tracking-widest2 uppercase text-cream/18 font-body">Scroll</span>
+      <span class="w-px h-10" style="background: linear-gradient(to bottom, rgba(250,247,242,0.18), transparent);"></span>
     </div>
   </section>
 
 
   <!-- ━━━━━━━━ INFO BAR ━━━━━━━━ -->
-  <section class="bg-gold/10 border-y border-gold/20">
+  <section class="bg-ink border-y border-gold/12">
     <div class="container-site">
-      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gold/20">
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gold/10">
         {[
-          { icon: "map-pin" as const, label: "Access", value: "渋谷駅より徒歩5分" },
-          { icon: "clock"   as const, label: "Hours",  value: "火〜金 10:00–20:00 / 土日 10:00–19:00" },
+          { icon: "map-pin"  as const, label: "Access", value: "渋谷駅より徒歩5分" },
+          { icon: "clock"    as const, label: "Hours",  value: "火〜金 10:00–20:00 / 土日 10:00–19:00" },
           { icon: "calendar" as const, label: "Closed", value: "月曜日 / 第1火曜日" },
         ].map(item => (
           <div class="flex items-center gap-4 py-5 px-2">
             <span class="text-gold flex-shrink-0">
-              <Icon name={item.icon} class="w-5 h-5" />
+              <Icon name={item.icon} class="w-4 h-4" />
             </span>
             <div>
-              <p class="text-[9px] tracking-widest2 uppercase text-ink-muted font-body mb-0.5">{item.label}</p>
-              <p class="text-xs text-ink font-body">{item.value}</p>
+              <p class="text-[9px] tracking-widest2 uppercase text-gold/45 font-body mb-0.5">{item.label}</p>
+              <p class="text-xs text-cream/65 font-body">{item.value}</p>
             </div>
           </div>
         ))}
@@ -82,106 +136,218 @@ function formatDate(iso: string) {
   </section>
 
 
-  <!-- ━━━━━━━━ ABOUT ━━━━━━━━ -->
-  <section class="sec bg-cream">
-    <div class="container-site">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+  <!-- ━━━━━━━━ ABOUT（オーバーラップデザイン） ━━━━━━━━ -->
+  <section class="sec bg-cream relative overflow-hidden">
+    <!-- 背景透かし文字 -->
+    <span class="watermark absolute right-[-4%] top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">CRAFT</span>
 
-        <!-- テキスト -->
-        <div>
-          <span class="section-label">About Us</span>
-          <h2 class="section-title mb-2">理容の本質を、<br/>ひとつひとつに。</h2>
-          <div class="divider mx-0"></div>
-          <div class="space-y-4 text-sm text-ink-muted leading-relaxed font-body">
-            <p>
-              Trim Studioは、「整える」という行為を通じてお客様の日常をより豊かにすることを目指すバーバーショップです。
-            </p>
-            <p>
-              ハサミ一本、カミソリ一刀に精確さと誠実さを込めて、あなたらしいスタイルを丁寧に仕上げます。
-              流行を追うだけでなく、骨格・髪質・生活スタイルを考慮した提案を心がけています。
-            </p>
-            <p>
-              清潔で落ち着いた空間で、リラックスしながらお任せください。
-            </p>
+    <div class="container-site relative z-10">
+      <div class="grid grid-cols-12 gap-4 lg:gap-0 items-center">
+
+        <!-- 画像コラージュ（左7カラム） -->
+        <div class="col-span-12 lg:col-span-7 reveal-left">
+          <div class="grid grid-cols-2 gap-3">
+            <!-- 左：縦長画像 -->
+            <div class="row-span-2" style="aspect-ratio: 3/4; overflow: hidden;">
+              <img
+                src="https://images.unsplash.com/photo-1541533848490-bc8115cd6522?auto=format&fit=crop&w=600&q=80"
+                alt="クラシックバーバー"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <!-- 右上 -->
+            <div style="aspect-ratio: 1/1; overflow: hidden;">
+              <img
+                src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=600&q=80"
+                alt="バーバーツール"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <!-- 右下 -->
+            <div style="aspect-ratio: 1/1; overflow: hidden;">
+              <img
+                src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80"
+                alt="シェービング"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
 
-        <!-- 写真プレースホルダー -->
-        <div class="grid grid-cols-2 gap-3">
-          {["店内", "スタイル", "シェービング", "外観"].map(l => (
-            <div class="aspect-square bg-cream-dark border border-ink/5 flex items-center justify-center">
-              <span class="text-[11px] text-ink/30 font-body">{l}</span>
+        <!-- テキストボックス（右、画像に重なる） -->
+        <div class="col-span-12 lg:col-span-6 lg:-ml-10 relative z-10 reveal-right delay-200">
+          <div class="bg-cream p-8 lg:p-12 shadow-sm border-l-4 border-gold">
+            <!-- 縦書きアクセント -->
+            <div class="hidden lg:flex absolute -left-10 top-10 flex-col items-center gap-2">
+              <span class="vertical-text text-[9px] tracking-widest2 text-gold/45 uppercase font-body">About</span>
+              <span class="w-px h-14 bg-gold/25"></span>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
 
-
-  <!-- ━━━━━━━━ PHILOSOPHY ━━━━━━━━ -->
-  <section class="sec bg-ink">
-    <div class="container-site">
-      <div class="max-w-2xl mx-auto text-center">
-        <span class="section-label text-gold/70">Our Philosophy</span>
-        <blockquote class="font-display text-2xl md:text-3xl text-cream leading-snug italic font-light mt-4 mb-8">
-          "A good haircut is not just about appearance—<br class="hidden md:block"/>
-          it's about how you feel."
-        </blockquote>
-        <div class="divider"></div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10 text-left">
-          {[
-            { num: "01", title: "精確な技術", body: "長年の経験と継続的な学習から生まれた、確かなカット技術。" },
-            { num: "02", title: "丁寧な接客", body: "カウンセリングを大切にし、お客様の理想を丁寧に引き出します。" },
-            { num: "03", title: "清潔な環境", body: "器具の消毒・衛生管理を徹底した、安心できる空間を提供します。" },
-          ].map(item => (
-            <div>
-              <p class="font-display text-4xl text-gold font-semibold mb-2">{item.num}</p>
-              <h3 class="font-display text-lg text-cream mb-2">{item.title}</h3>
-              <p class="text-xs text-cream/50 leading-relaxed font-body">{item.body}</p>
+            <span class="section-label">About Us</span>
+            <h2 class="section-title mb-2">
+              理容の本質を、<br/>ひとつひとつに。
+            </h2>
+            <div class="divider-left"></div>
+            <div class="space-y-4 text-sm text-ink-muted leading-relaxed font-body">
+              <p>
+                Trim Studioは、「整える」という行為を通じてお客様の日常をより豊かにすることを目指すバーバーショップです。
+              </p>
+              <p>
+                ハサミ一本、カミソリ一刀に精確さと誠実さを込めて、あなたらしいスタイルを丁寧に仕上げます。骨格・髪質・生活スタイルを考慮した提案を心がけています。
+              </p>
+              <p>清潔で落ち着いた空間で、リラックスしながらお任せください。</p>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ━━━━━━━━ MENU PREVIEW ━━━━━━━━ -->
-  <section class="sec bg-cream-dark">
-    <div class="container-site">
-      <div class="text-center mb-12">
-        <span class="section-label">Services</span>
-        <h2 class="section-title">主なメニュー</h2>
-        <div class="divider"></div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-ink/10 border border-ink/10">
-        {[
-          { name: "カット",               price: "¥4,000", desc: "骨格・髪質に合わせた丁寧なカット。" },
-          { name: "シェービング",          price: "¥2,500", desc: "伝統技法によるすっきりとした仕上がり。" },
-          { name: "カット + シェービング", price: "¥6,000", desc: "トータルケアでより洗練されたスタイルに。" },
-        ].map(item => (
-          <div class="bg-cream p-8 text-center hover:bg-cream-dark transition-colors duration-200">
-            <p class="font-display text-xl text-ink mb-1">{item.name}</p>
-            <p class="text-2xl font-display font-semibold text-gold mb-4">{item.price}</p>
-            <p class="text-xs text-ink-muted leading-relaxed font-body">{item.desc}</p>
+            <div class="mt-8">
+              <a href="/menu" class="btn-outline-dark">Our Services</a>
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div class="text-center mt-8">
-        <a href="/menu" class="btn-outline-dark">Full Menu</a>
       </div>
     </div>
   </section>
 
+
+  <!-- ━━━━━━━━ PHILOSOPHY（重厚なタイポグラフィ） ━━━━━━━━ -->
+  <section class="sec bg-ink relative overflow-hidden">
+    <!-- 透かし文字 -->
+    <span class="watermark-dark absolute left-[-6%] top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">TRIM</span>
+    <div class="absolute top-0 right-[16%] w-px h-full bg-cream/[0.03] pointer-events-none"></div>
+
+    <div class="container-site relative z-10">
+      <div class="grid grid-cols-12 gap-8 md:gap-12 items-center">
+
+        <!-- 引用（左7カラム） -->
+        <div class="col-span-12 lg:col-span-7 reveal">
+          <span class="section-label text-gold/55">Our Philosophy</span>
+          <!-- 大きな装飾引用符 -->
+          <div class="font-display text-[7rem] text-gold/12 leading-none select-none -mb-6">&ldquo;</div>
+          <blockquote class="font-display text-2xl md:text-3xl text-cream leading-snug italic font-light mb-6">
+            A good haircut is not just<br class="hidden md:block"/>
+            about appearance—<br/>
+            it's about how you feel.
+          </blockquote>
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-px bg-gold/45"></span>
+            <span class="text-[10px] text-gold/45 tracking-widest uppercase font-body">Trim Studio</span>
+          </div>
+        </div>
+
+        <!-- 価値観（右5カラム） -->
+        <div class="col-span-12 lg:col-span-5 reveal-right delay-200">
+          <div class="space-y-7">
+            {[
+              { num: "01", title: "精確な技術", body: "長年の経験と継続的な学習から生まれた、確かなカット技術。" },
+              { num: "02", title: "丁寧な接客", body: "カウンセリングを大切にし、お客様の理想を丁寧に引き出します。" },
+              { num: "03", title: "清潔な環境", body: "器具の消毒・衛生管理を徹底した、安心できる空間を提供します。" },
+            ].map(item => (
+              <div class="flex gap-5 items-start pb-7 border-b border-cream/8 last:border-0 last:pb-0">
+                <span class="font-display text-5xl text-gold/18 font-semibold leading-none flex-shrink-0 select-none">
+                  {item.num}
+                </span>
+                <div>
+                  <h3 class="font-display text-lg text-cream mb-1.5">{item.title}</h3>
+                  <p class="text-xs text-cream/40 leading-relaxed font-body">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ━━━━━━━━ SERVICES PREVIEW（非対称カードグリッド） ━━━━━━━━ -->
+  <section class="sec bg-cream-dark relative overflow-hidden">
+    <div class="container-site">
+
+      <div class="flex items-end justify-between mb-12 gap-4">
+        <div class="reveal">
+          <span class="section-label">Services</span>
+          <h2 class="section-title">主なメニュー</h2>
+        </div>
+        <a
+          href="/menu"
+          class="hidden sm:inline-flex items-center gap-1.5 text-[10px] tracking-widest2 uppercase font-body text-ink-muted hover:text-ink transition-colors duration-200"
+        >
+          Full Menu <Icon name="arrow-right" class="w-3.5 h-3.5" />
+        </a>
+      </div>
+
+      <!-- 非対称グリッド：1大カード＋2小カード -->
+      <div class="grid grid-cols-12 gap-4 reveal">
+
+        <!-- フィーチャードカード（左6カラム、背景画像あり） -->
+        <div class="col-span-12 md:col-span-6 relative overflow-hidden group bg-ink">
+          <img
+            src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80"
+            alt="カット"
+            class="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-35 group-hover:scale-105 transition-all duration-700"
+            loading="lazy"
+          />
+          <div class="relative z-10 p-8 md:p-10 flex flex-col justify-end min-h-[280px] md:min-h-[380px]">
+            <span class="section-label text-gold/60 mb-3">Featured</span>
+            <p class="font-display text-3xl text-cream mb-0.5">カット</p>
+            <p class="font-display text-4xl text-gold font-semibold mb-4">¥4,000</p>
+            <p class="text-xs text-cream/45 leading-relaxed font-body max-w-xs mb-6">
+              骨格・髪質に合わせた丁寧なカット。カウンセリングで最適なスタイルをご提案します。
+            </p>
+            <a href="/menu#cut" class="btn-outline-light self-start text-[11px]">詳しく見る</a>
+          </div>
+        </div>
+
+        <!-- 2小カード（右6カラム） -->
+        <div class="col-span-12 md:col-span-6 grid grid-rows-2 gap-4">
+
+          <!-- シェービング -->
+          <div class="bg-cream border border-ink/8 hover:border-gold/35 transition-colors duration-300 group flex items-center gap-5 p-6">
+            <div class="flex-shrink-0 w-16 h-16 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=200&q=80"
+                alt="シェービング"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-display text-xl text-ink mb-0.5">シェービング</p>
+              <p class="font-display text-2xl text-gold font-semibold">¥2,500</p>
+              <p class="text-[11px] text-ink-muted font-body mt-1 leading-relaxed">伝統技法によるクリーンな仕上がり。</p>
+            </div>
+          </div>
+
+          <!-- セットメニュー -->
+          <div class="bg-ink hover:bg-ink-light transition-colors duration-300 group flex items-center gap-5 p-6">
+            <div class="flex-1 min-w-0">
+              <p class="font-display text-xl text-cream mb-0.5">カット + シェービング</p>
+              <p class="font-display text-2xl text-gold font-semibold">¥6,000</p>
+              <p class="text-[11px] text-cream/38 font-body mt-1 leading-relaxed">
+                トータルケアで洗練されたスタイルに。
+              </p>
+            </div>
+            <a href="/contact" class="flex-shrink-0 btn-gold text-[10px]">予約する</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="text-center mt-8 sm:hidden">
+        <a href="/menu" class="btn-outline-dark">メニュー一覧</a>
+      </div>
+
+    </div>
+  </section>
 
 
   <!-- ━━━━━━━━ BLOG PREVIEW ━━━━━━━━ -->
   <section class="sec bg-cream">
     <div class="container-site">
-      <div class="flex items-end justify-between mb-10 gap-4">
+      <div class="flex items-end justify-between mb-10 gap-4 reveal">
         <div>
           <span class="section-label">From the Blog</span>
           <h2 class="section-title">最新の記事</h2>
@@ -190,20 +356,19 @@ function formatDate(iso: string) {
           href="/blog"
           class="hidden sm:inline-flex items-center gap-1.5 text-[10px] tracking-widest2 uppercase font-body text-ink-muted hover:text-ink transition-colors duration-200 flex-shrink-0"
         >
-          All Posts
-          <Icon name="arrow-right" class="w-3.5 h-3.5" />
+          All Posts <Icon name="arrow-right" class="w-3.5 h-3.5" />
         </a>
       </div>
 
       {latestPosts.length > 0 ? (
         <>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
             {latestPosts.map((post) => {
               const cat = getCategoryName(post.category);
               return (
                 <a
                   href={`/blog/${post.id}`}
-                  class="group flex flex-col bg-white border border-ink/8 hover:border-gold/50 transition-colors duration-200 overflow-hidden"
+                  class="group flex flex-col bg-white border border-ink/8 hover:border-gold/40 transition-colors duration-300 overflow-hidden"
                 >
                   {post.eyecatch ? (
                     <div class="aspect-video overflow-hidden bg-cream-dark">
@@ -214,7 +379,7 @@ function formatDate(iso: string) {
                         height="338"
                         loading="lazy"
                         decoding="async"
-                        class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                        class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                       />
                     </div>
                   ) : (
@@ -244,13 +409,13 @@ function formatDate(iso: string) {
               );
             })}
           </div>
-
           <div class="text-center mt-8 sm:hidden">
             <a href="/blog" class="btn-outline-dark">ブログ一覧を見る</a>
           </div>
         </>
       ) : (
-        <div class="text-center py-16 border border-dashed border-ink/10">
+        <div class="text-center py-16 border border-dashed border-ink/10 reveal">
+          <Icon name="scissors" class="w-8 h-8 text-ink/18 mx-auto mb-4" />
           <p class="text-xs text-ink-muted font-body">
             microCMS にブログ記事を追加するとここに表示されます。
           </p>
@@ -259,17 +424,33 @@ function formatDate(iso: string) {
     </div>
   </section>
 
-  <!-- ━━━━━━━━ CTA ━━━━━━━━ -->
-  <section class="sec bg-ink">
-    <div class="container-site text-center">
-      <span class="section-label text-gold/70">Reservation</span>
-      <h2 class="font-display text-3xl md:text-4xl text-cream mb-3">ご予約・お問い合わせ</h2>
+
+  <!-- ━━━━━━━━ CTA（フルブリード画像背景） ━━━━━━━━ -->
+  <section class="relative overflow-hidden bg-ink py-28">
+    <div class="absolute inset-0 opacity-[0.12]">
+      <img
+        src="https://images.unsplash.com/photo-1621605816197-6da28e0e9fb6?auto=format&fit=crop&w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-ink/60"></div>
+    </div>
+
+    <!-- 透かし文字 -->
+    <span class="watermark-dark absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none">BOOK</span>
+
+    <div class="container-site relative z-10 text-center reveal">
+      <span class="section-label text-gold/55">Reservation</span>
+      <h2 class="font-display text-4xl md:text-5xl text-cream mb-4 leading-tight">
+        ご予約・<br class="sm:hidden"/>お問い合わせ
+      </h2>
       <div class="divider"></div>
-      <p class="text-xs text-cream/50 mb-10 font-body">お電話またはフォームよりお気軽にどうぞ</p>
+      <p class="text-xs text-cream/38 mb-12 font-body">お電話またはフォームよりお気軽にどうぞ</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href={SITE.telHref}
-          class="inline-flex items-center justify-center gap-2.5 px-9 py-3 bg-cream text-ink text-xs tracking-widest2 font-body font-medium hover:bg-cream-dark transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          class="inline-flex items-center justify-center gap-2.5 px-9 py-3.5 bg-cream text-ink text-xs tracking-widest2 font-body font-medium hover:bg-cream-dark transition-colors duration-300"
         >
           <Icon name="phone" class="w-4 h-4" />
           {SITE.tel}

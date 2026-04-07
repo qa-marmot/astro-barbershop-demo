@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import StructuredData from "@/components/StructuredData.astro";
@@ -41,6 +42,7 @@ const canonical = new URL(Astro.url.pathname, siteUrl).href;
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
   <StructuredData />
+  <ViewTransitions />
 </head>
 <body>
   <Header />
@@ -48,5 +50,27 @@ const canonical = new URL(Astro.url.pathname, siteUrl).href;
     <slot />
   </main>
   <Footer />
+
+  <!-- スクロールリビール（Intersection Observer） -->
+  <script>
+    function initReveal() {
+      const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
+      els.forEach(el => io.observe(el));
+    }
+
+    initReveal();
+    document.addEventListener('astro:page-load', initReveal);
+  </script>
 </body>
 </html>
