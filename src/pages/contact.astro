@@ -8,120 +8,227 @@ import { SITE } from "@/lib/config";
   title="Contact | Trim Studio"
   description="Trim Studio へのご予約・お問い合わせはこちら。お気軽にご連絡ください。"
 >
-  <!-- ページヘッダー -->
-  <section class="py-20 md:py-24 bg-ink">
-    <div class="container-site">
-      <span class="section-label text-gold/70">Get in Touch</span>
-      <h1 class="font-display text-5xl md:text-6xl text-cream font-semibold leading-tight">Contact</h1>
+
+  <!-- ━━━━━━━━ ページヘッダー ━━━━━━━━ -->
+  <section class="relative py-24 md:py-32 bg-ink overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.15]">
+      <img
+        src="https://images.unsplash.com/photo-1578177211754-0f05c4b5e9f7?auto=format&fit=crop&w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0" style="background: linear-gradient(to right, #1c1917 30%, rgba(28,25,23,0.6));"></div>
+    </div>
+    <span class="watermark-dark absolute right-[-2%] top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">CONTACT</span>
+
+    <div class="container-site relative z-10 animate-fade-up">
+      <span class="section-label text-gold/55">Get in Touch</span>
+      <h1 class="font-display text-6xl md:text-7xl text-cream font-semibold leading-none">Contact</h1>
     </div>
   </section>
 
-  <!-- お問い合わせ方法 -->
+
+  <!-- ━━━━━━━━ お問い合わせ方法（2カラム分割） ━━━━━━━━ -->
   <section class="sec bg-cream">
     <div class="container-site">
-      <div class="max-w-3xl mx-auto">
 
-        <p class="text-sm text-ink-muted font-body text-center mb-14 leading-relaxed">
-          ご予約・ご質問など、お気軽にお問い合わせください。<br/>
-          お電話が繋がらない場合は折り返しご連絡いたします。
-        </p>
+      <div class="grid grid-cols-12 gap-8 md:gap-14 items-start">
 
-        <!-- 2カラム: 電話 / フォーム -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <!-- 左：電話予約（ダーク） -->
+        <div class="col-span-12 md:col-span-5 reveal-left">
+          <div class="bg-ink p-8 lg:p-10 relative overflow-hidden h-full">
+            <!-- 装飾 -->
+            <div class="absolute top-0 right-0 w-24 h-24 border-r border-t border-gold/15 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-16 h-16 border-l border-b border-gold/10 pointer-events-none"></div>
 
-          <!-- 電話 -->
-          <div class="bg-ink p-8 text-center">
-            <div class="w-12 h-12 mx-auto mb-5 flex items-center justify-center border border-gold/40 text-gold">
+            <div class="w-12 h-12 mb-6 flex items-center justify-center border border-gold/35 text-gold">
               <Icon name="phone" class="w-5 h-5" />
             </div>
-            <h2 class="font-display text-xl text-cream mb-2">電話予約</h2>
-            <p class="text-[10px] tracking-wider text-cream/40 font-body uppercase mb-5">Phone Reservation</p>
-            <p class="font-display text-2xl text-gold mb-1">{SITE.tel}</p>
-            <p class="text-[11px] text-cream/50 font-body leading-relaxed mb-6">
-              火〜金  10:00 – 20:00<br/>
-              土・日  10:00 – 19:00<br/>
-              <span class="text-cream/30">定休日：月曜日</span>
-            </p>
-            <a href={SITE.telHref} class="btn-outline-light text-[11px]">電話をかける</a>
-          </div>
 
-          <!-- フォーム -->
-          <div class="bg-cream-dark border border-ink/10 p-8 text-center">
-            <div class="w-12 h-12 mx-auto mb-5 flex items-center justify-center border border-gold/40 text-gold">
-              <Icon name="mail" class="w-5 h-5" />
+            <span class="section-label text-gold/55">Phone</span>
+            <h2 class="font-display text-2xl text-cream mb-2">電話予約</h2>
+            <p class="text-[10px] tracking-wider text-cream/30 font-body uppercase mb-6">Phone Reservation</p>
+
+            <a
+              href={SITE.telHref}
+              class="font-display text-3xl text-gold mb-1 hover:text-gold-light transition-colors duration-200 block"
+            >
+              {SITE.tel}
+            </a>
+
+            <div class="mt-4 space-y-1 mb-8">
+              <p class="text-[11px] text-cream/40 font-body">火〜金　10:00 – 20:00</p>
+              <p class="text-[11px] text-cream/40 font-body">土・日　10:00 – 19:00</p>
+              <p class="text-[11px] text-cream/22 font-body mt-2">定休日：月曜日 / 第1火曜日</p>
             </div>
-            <h2 class="font-display text-xl text-ink mb-2">フォーム</h2>
-            <p class="text-[10px] tracking-wider text-ink-muted font-body uppercase mb-5">Online Form</p>
-            <p class="text-xs text-ink-muted font-body leading-relaxed mb-6">
-              24時間受付中<br/>
-              2営業日以内にご返信いたします
-            </p>
-            <a href="#form" class="btn-outline-dark text-[11px]">フォームへ進む</a>
+
+            <a href={SITE.telHref} class="btn-outline-light text-[11px]">電話をかける</a>
+
+            <!-- 縦書き装飾 -->
+            <div class="absolute right-5 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-2">
+              <span class="vertical-text text-[9px] tracking-widest2 text-gold/20 uppercase font-body">Call Us</span>
+            </div>
           </div>
         </div>
 
-        <!-- フォーム埋め込みエリア -->
-        <div id="form" class="bg-cream-dark border border-ink/10 p-8 md:p-10">
-          <h2 class="font-display text-2xl text-ink text-center mb-8">お問い合わせフォーム</h2>
+        <!-- 右：お問い合わせフォーム -->
+        <div class="col-span-12 md:col-span-7 reveal-right delay-200">
+          <div class="relative">
+            <!-- 装飾 -->
+            <div class="absolute -top-3 -left-3 w-10 h-10 border-l border-t border-gold/25 pointer-events-none"></div>
 
-          <!--
-            【設定方法】
-            1. Google フォームを作成し「送信 → 埋め込み」からコードを取得
-            2. 下記コメントを解除して YOUR_GOOGLE_FORM_ID を差し替え
-            セキュリティ: CSP に https://docs.google.com を許可済み。
-            sandbox 属性で余分な権限を制限しています。
-          -->
+            <span class="section-label">Online Form</span>
+            <h2 class="section-title mb-8">お問い合わせフォーム</h2>
 
-          <div class="border-2 border-dashed border-ink/10 p-10 text-center">
-            <p class="text-xs text-ink-muted font-body">
-              Google フォームを設定<br/>
-            </p>
+            <!-- フォーム本体 -->
+            <form id="contact-form" novalidate class="space-y-5">
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <!-- お名前 -->
+                <div>
+                  <label for="name" class="form-label">お名前 <span class="text-gold">*</span></label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    autocomplete="name"
+                    class="form-input"
+                    placeholder="山田 太郎"
+                  />
+                  <p id="name-error" class="form-error hidden"></p>
+                </div>
+
+                <!-- メールアドレス -->
+                <div>
+                  <label for="email" class="form-label">メールアドレス <span class="text-gold">*</span></label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    class="form-input"
+                    placeholder="example@email.com"
+                  />
+                  <p id="email-error" class="form-error hidden"></p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <!-- 電話番号 -->
+                <div>
+                  <label for="phone" class="form-label">お電話番号</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    autocomplete="tel"
+                    class="form-input"
+                    placeholder="03-0000-0000"
+                  />
+                  <p id="phone-error" class="form-error hidden"></p>
+                </div>
+
+                <!-- ご希望のサービス -->
+                <div>
+                  <label for="service" class="form-label">ご希望のサービス</label>
+                  <div class="relative">
+                    <select id="service" name="service" class="form-input appearance-none pr-8 cursor-pointer bg-transparent">
+                      <option value="">選択してください</option>
+                      <option value="cut">カット</option>
+                      <option value="shave">シェービング</option>
+                      <option value="set">セットメニュー</option>
+                      <option value="other">その他</option>
+                    </select>
+                    <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-ink-muted">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- お問い合わせ内容 -->
+              <div>
+                <label for="message" class="form-label">お問い合わせ内容 <span class="text-gold">*</span></label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  class="form-input resize-none"
+                  placeholder="ご予約・ご質問など、お気軽にご記入ください。（10文字以上）"
+                ></textarea>
+                <p id="message-error" class="form-error hidden"></p>
+              </div>
+
+              <!-- プライバシーポリシー同意 -->
+              <div class="flex items-start gap-3 pt-1">
+                <input
+                  type="checkbox"
+                  id="privacy"
+                  name="privacy"
+                  class="mt-0.5 w-4 h-4 accent-gold flex-shrink-0 cursor-pointer"
+                />
+                <label for="privacy" class="text-[11px] text-ink-muted font-body leading-relaxed cursor-pointer">
+                  いただいた個人情報はお問い合わせ対応にのみ使用し、第三者に提供しません。
+                </label>
+              </div>
+              <p id="privacy-error" class="form-error hidden"></p>
+
+              <!-- 送信ボタン -->
+              <button
+                type="submit"
+                id="submit-btn"
+                class="btn-dark w-full text-center justify-center mt-2"
+              >
+                送信する
+              </button>
+            </form>
+
+            <!-- 送信完了メッセージ -->
+            <div id="form-success" class="hidden text-center py-14 px-6 border border-gold/25 bg-cream-dark">
+              <div class="font-display text-5xl text-gold mb-4">✓</div>
+              <p class="font-display text-2xl text-ink mb-3">送信完了</p>
+              <p class="text-sm text-ink-muted font-body leading-relaxed">
+                お問い合わせありがとうございます。<br/>
+                2営業日以内にご返信いたします。
+              </p>
+            </div>
           </div>
-
-          <!--
-          <iframe
-            src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true"
-            width="100%"
-            height="800"
-            class="border-0"
-            title="お問い合わせフォーム"
-            sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
-            loading="lazy"
-          >
-            読み込んでいます…
-          </iframe>
-          -->
-        </div>
-
-        <!-- 注意事項 -->
-        <div class="mt-8 p-6 border border-gold bg-gold/5">
-          <h3 class="text-xs font-body font-medium tracking-widest uppercase text-ink-muted mb-4">Notice</h3>
-          <ul class="space-y-2">
-            {[
-              "営業時間外のお問い合わせは翌営業日以降のご対応となります。",
-              "お急ぎの場合はお電話でのご連絡をおすすめいたします。",
-              "いただいた個人情報はお問い合わせ対応以外の目的では使用しません。",
-              "メールアドレスの入力間違いにご注意ください。",
-            ].map(t => (
-              <li class="flex items-start gap-2.5 text-xs text-ink-muted font-body">
-                <span class="text-gold mt-0.5 flex-shrink-0"><Icon name="chevron-right" class="w-3 h-3" /></span>
-                {t}
-              </li>
-            ))}
-          </ul>
         </div>
 
       </div>
+
+      <!-- 注意事項 -->
+      <div class="mt-14 p-6 border border-gold/25 bg-gold/5 reveal">
+        <h3 class="text-[10px] font-body font-medium tracking-widest2 uppercase text-ink-muted mb-4">Notice</h3>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            "営業時間外のお問い合わせは翌営業日以降のご対応となります。",
+            "お急ぎの場合はお電話でのご連絡をおすすめいたします。",
+            "いただいた個人情報はお問い合わせ対応以外の目的では使用しません。",
+            "メールアドレスの入力間違いにご注意ください。",
+          ].map(t => (
+            <li class="flex items-start gap-2.5 text-xs text-ink-muted font-body">
+              <span class="text-gold mt-0.5 flex-shrink-0"><Icon name="chevron-right" class="w-3 h-3" /></span>
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
+
     </div>
   </section>
 
-  <!-- 店舗情報 -->
-  <section class="sec bg-ink">
+
+  <!-- ━━━━━━━━ 店舗情報 ━━━━━━━━ -->
+  <section class="py-20 bg-ink">
     <div class="container-site">
-      <div class="max-w-2xl mx-auto">
-        <span class="section-label text-gold/70">Shop Info</span>
+      <div class="max-w-2xl mx-auto reveal">
+        <span class="section-label text-gold/55">Shop Info</span>
         <h2 class="font-display text-2xl text-cream mb-8">店舗情報</h2>
-        <dl class="divide-y divide-cream/10">
+        <dl class="divide-y divide-cream/8">
           {[
             { dt: "店舗名",   dd: `${SITE.name}（${SITE.nameJa}）` },
             { dt: "住所",     dd: `〒${SITE.postalCode} ${SITE.address}` },
@@ -130,12 +237,80 @@ import { SITE } from "@/lib/config";
             { dt: "定休日",   dd: SITE.closed },
           ].map(({ dt, dd }) => (
             <div class="flex gap-6 py-4">
-              <dt class="w-20 flex-shrink-0 text-[11px] text-cream/30 font-body tracking-wider pt-0.5">{dt}</dt>
-              <dd class="text-sm text-cream/70 font-body">{dd}</dd>
+              <dt class="w-20 flex-shrink-0 text-[11px] text-cream/28 font-body tracking-wider pt-0.5">{dt}</dt>
+              <dd class="text-sm text-cream/62 font-body">{dd}</dd>
             </div>
           ))}
         </dl>
       </div>
     </div>
   </section>
+
 </Layout>
+
+<script>
+  import { validateContactForm } from '../lib/validation.ts';
+
+  const form       = document.getElementById('contact-form') as HTMLFormElement | null;
+  const successMsg = document.getElementById('form-success') as HTMLElement | null;
+  const submitBtn  = document.getElementById('submit-btn') as HTMLButtonElement | null;
+
+  if (!form || !successMsg || !submitBtn) throw new Error('Contact form elements not found');
+
+  function showError(fieldId: string, message: string) {
+    const errorEl = document.getElementById(`${fieldId}-error`);
+    const inputEl = document.getElementById(fieldId);
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.remove('hidden');
+    }
+    if (inputEl) inputEl.classList.add('form-input-error');
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('.form-error').forEach(el => {
+      el.classList.add('hidden');
+      (el as HTMLElement).textContent = '';
+    });
+    document.querySelectorAll('.form-input-error').forEach(el => {
+      el.classList.remove('form-input-error');
+    });
+  }
+
+  form.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+    clearErrors();
+
+    const privacyCheck = document.getElementById('privacy') as HTMLInputElement;
+    if (!privacyCheck?.checked) {
+      showError('privacy', '個人情報の取り扱いへの同意が必要です');
+      return;
+    }
+
+    const data = {
+      name:    (document.getElementById('name')    as HTMLInputElement).value,
+      email:   (document.getElementById('email')   as HTMLInputElement).value,
+      phone:   (document.getElementById('phone')   as HTMLInputElement).value,
+      date:    '',
+      message: (document.getElementById('message') as HTMLTextAreaElement).value,
+    };
+
+    const { valid, errors } = validateContactForm(data);
+
+    if (!valid) {
+      for (const [field, message] of Object.entries(errors)) {
+        showError(field, message as string);
+      }
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中...';
+
+    // 実際の送信処理（バックエンドへの接続に置き換えてください）
+    await new Promise<void>(resolve => setTimeout(resolve, 800));
+
+    form.classList.add('hidden');
+    successMsg.classList.remove('hidden');
+  });
+</script>
