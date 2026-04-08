@@ -1,7 +1,7 @@
 import { defineSeoConfig } from '@seo-guardian/core';
 
 export default defineSeoConfig({
-  baseUrl: process.env.BASE_URL ?? 'http://localhost:3000',
+  baseUrl: process.env.BASE_URL ?? 'http://localhost:4321',
 
   rules: {
     'title-length':       { min: 30, max: 60, severity: 'error' },
